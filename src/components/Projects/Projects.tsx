@@ -13,6 +13,7 @@ interface Project {
   description: string;
   image: string;
   link: string | null;
+  repo?: string;
   fullDescription?: string[];
   role?: string;
   keyFeatures?: string;
@@ -26,6 +27,7 @@ const projectsData: Project[] = [
   {
     id: 1,
     title: "ByggExp",
+    repo: "https://github.com/alexgeho/ByggExp.se",
     description:
       "Presentationswebbplats för ByggExp – en plattform för tidsrapportering, projektstyrning och fakturering. Integrerad med mobilapp och adminpanel.",
     image: project1,
@@ -45,10 +47,11 @@ const projectsData: Project[] = [
   {
     id: 2,
     title: "ByggExp Admin",
+    repo: "https://github.com/alexgeho/byggexp-admin",
     description:
       "Adminpanel för ByggExp – hantering av projekt, uppgifter, dokumentation och personal i realtid. Integrerad med mobilapp och backend.",
     image: project2,
-    link: null,
+    link: "https://admin.byggexp.se/",
     type: "Admin Dashboard",
     year: "2026",
     fullDescription: [
@@ -57,10 +60,12 @@ const projectsData: Project[] = [
     ],
     keyFeatures:
       "Automatisk tidsrapportering, uppgifter med påminnelser, personalöversikt i realtid, fotodokumentation kopplad till projekt, projekt- och personalplanering, fakturor och offerter.",
+    techStack: "React, TypeScript, REST API",
   },
   {
     id: 3,
     title: "ByggExp App",
+    repo: "https://github.com/alexgeho/byggexp-app",
     description:
       "Mobilapp för tidsrapportering, uppgiftshantering och projektstyrning. Integrerad med ByggExps adminpanel och backend.",
     image: project3,
@@ -75,6 +80,7 @@ const projectsData: Project[] = [
   {
     id: 4,
     title: "AGRY AB",
+    repo: "https://github.com/alexgeho/js-intro-inl-1-webshop",
     description:
       "Webbshop för prefabricerade armeringsprodukter med användarautentisering och responsiv design.",
     image: project4,
@@ -95,6 +101,7 @@ const projectsData: Project[] = [
   {
     id: 5,
     title: "Blogger Backend",
+    repo: "https://github.com/alexgeho/blogger-platform-Nestjs",
     description: "REST API för hantering av användare, inlägg och kommentarer.",
     image: project5,
     link: null,
@@ -113,6 +120,7 @@ const projectsData: Project[] = [
   {
     id: 6,
     title: "Express Platform",
+    repo: "https://github.com/alexgeho/my-api",
     description: "REST API byggt med Express och TypeScript.",
     image: project6,
     link: null,
@@ -262,6 +270,25 @@ export default function Projects() {
                     <p className="project-banner-card__desc">
                       {project.description}
                     </p>
+                    {project.techStack && (
+                      <ul className="project-banner-card__tags">
+                        {project.techStack.split(", ").map((tag) => (
+                          <li key={tag}>{tag}</li>
+                        ))}
+                      </ul>
+                    )}
+                    <div className="project-banner-card__links">
+                      {project.repo && (
+                        <a href={project.repo} target="_blank" rel="noreferrer">
+                          GitHub
+                        </a>
+                      )}
+                      {project.link && (
+                        <a href={project.link} target="_blank" rel="noreferrer">
+                          Live demo
+                        </a>
+                      )}
+                    </div>
                     <button
                       onClick={() => {
                         if (!hasDragged) openModal(project);
