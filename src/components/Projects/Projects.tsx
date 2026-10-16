@@ -6,6 +6,7 @@ import project3 from "../../assets/projects/project3.png";
 import project4 from "../../assets/projects/project4.png";
 import project5 from "../../assets/projects/project5.png";
 import project6 from "../../assets/projects/project6.png";
+import phoneMockup from "../../assets/projects/phone2.png";
 
 interface Project {
   id: number;
@@ -14,6 +15,7 @@ interface Project {
   image: string;
   link: string | null;
   repo?: string;
+  phone?: string;
   fullDescription?: string[];
   role?: string;
   keyFeatures?: string;
@@ -69,6 +71,7 @@ const projectsData: Project[] = [
     description:
       "Mobilapp för tidsrapportering, uppgiftshantering och projektstyrning. Integrerad med ByggExps adminpanel och backend.",
     image: project3,
+    phone: phoneMockup,
     link: null,
     year: "2023",
     fullDescription: [
@@ -255,12 +258,25 @@ export default function Projects() {
                 <div className="project-banner-card__info">
                   {/* Project img */}
                   <div className="project-img">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="project-img__img"
-                      draggable={false}
-                    />
+                    {project.phone ? (
+                      <img
+                        src={project.phone}
+                        alt={project.title}
+                        className="project-img__phone"
+                        draggable={false}
+                      />
+                    ) : (
+                      <div className="laptop">
+                        <div className="laptop__screen">
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            draggable={false}
+                          />
+                        </div>
+                        <div className="laptop__base" aria-hidden />
+                      </div>
+                    )}
                   </div>
                   <div className="project-banner-card__content">
                     {/* Title, description and button below */}
