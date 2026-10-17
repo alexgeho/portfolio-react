@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import "./Projects.scss";
-import project1 from "../../assets/projects/project1.png";
-import project2 from "../../assets/projects/project2.png";
 import project3 from "../../assets/projects/project3.png";
 import project4 from "../../assets/projects/project4.png";
 import project5 from "../../assets/projects/project5.png";
 import project6 from "../../assets/projects/project6.png";
 import phoneMockup from "../../assets/projects/phone2.png";
+import byggexpWeb1 from "../../assets/projects/byggexp-web1.jpg";
+import byggexpWeb2 from "../../assets/projects/byggexp-web2.jpg";
+import byggexpWeb3 from "../../assets/projects/byggexp-web3.jpg";
+import byggexpAdmin1 from "../../assets/projects/byggexp-admin1.jpg";
+import byggexpAdmin2 from "../../assets/projects/byggexp-admin2.jpg";
+import byggexpAdmin3 from "../../assets/projects/byggexp-admin3.jpg";
 
 interface Project {
   id: number;
@@ -16,6 +20,7 @@ interface Project {
   link: string | null;
   repo?: string;
   phone?: string;
+  gallery?: string[];
   fullDescription?: string[];
   role?: string;
   keyFeatures?: string;
@@ -32,7 +37,8 @@ const projectsData: Project[] = [
     repo: "https://github.com/alexgeho/ByggExp.se",
     description:
       "Presentationswebbplats för ByggExp – en plattform för tidsrapportering, projektstyrning och fakturering. Integrerad med mobilapp och adminpanel.",
-    image: project1,
+    image: byggexpWeb1,
+    gallery: [byggexpWeb1, byggexpWeb2, byggexpWeb3],
     link: "https://byggexp.se/",
     type: "Product Website",
     year: "2025",
@@ -52,7 +58,8 @@ const projectsData: Project[] = [
     repo: "https://github.com/alexgeho/byggexp-admin",
     description:
       "Adminpanel för ByggExp – hantering av projekt, uppgifter, dokumentation och personal i realtid. Integrerad med mobilapp och backend.",
-    image: project2,
+    image: byggexpAdmin1,
+    gallery: [byggexpAdmin1, byggexpAdmin2, byggexpAdmin3],
     link: "https://admin.byggexp.se/",
     type: "Admin Dashboard",
     year: "2026",
@@ -142,6 +149,16 @@ const projectsData: Project[] = [
 const extendedProjects = [...projectsData, ...projectsData, ...projectsData];
 
 export default function Projects() {
+  const [galleryIndex, setGalleryIndex] = useState<Record<number, number>>(
+    {},
+  );
+  const changeGallery = (project: Project, dir: number) => {
+    const total = project.gallery?.length ?? 1;
+    setGalleryIndex((prev) => ({
+      ...prev,
+      [project.id]: ((prev[project.id] ?? 0) + dir + total) % total,
+    }));
+  };
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentIndex, setCurrentIndex] = useState(projectsData.length);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -269,13 +286,49 @@ export default function Projects() {
                       <div className="laptop">
                         <div className="laptop__screen">
                           <img
-                            src={project.image}
+                            src={
+                              project.gallery
+                                ? project.gallery[galleryIndex[project.id] ?? 0]
+                                : project.image
+                            }
                             alt={project.title}
                             draggable={false}
                           />
                         </div>
                         <div className="laptop__base" aria-hidden />
                       </div>
+                    )}
+                    {project.gallery && (
+                      <>
+                        <button
+                          className="project-img__arrow project-img__arrow--prev"
+                          aria-label="Föregående bild"
+                          onPointerDown={(e) => e.stopPropagation()}
+                          onClick={() => changeGallery(project, -1)}
+                        >
+                          ‹
+                        </button>
+                        <button
+                          className="project-img__arrow project-img__arrow--next"
+                          aria-label="Nästa bild"
+                          onPointerDown={(e) => e.stopPropagation()}
+                          onClick={() => changeGallery(project, 1)}
+                        >
+                          ›
+                        </button>
+                        <div className="project-img__dots" aria-hidden>
+                          {project.gallery.map((_, i) => (
+                            <span
+                              key={i}
+                              className={
+                                i === (galleryIndex[project.id] ?? 0)
+                                  ? "active"
+                                  : ""
+                              }
+                            />
+                          ))}
+                        </div>
+                      </>
                     )}
                   </div>
                   <div className="project-banner-card__content">

@@ -114,9 +114,53 @@
     height: 220px;
     background: #eceef1;
     border-radius: 24px;
+    position: relative;
 
     @media (min-width: $tablet) {
       height: 300px;
+    }
+  }
+
+  .project-img__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    color: #111;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &--prev {
+      left: 12px;
+    }
+    &--next {
+      right: 12px;
+    }
+  }
+
+  .project-img__dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+
+    span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c4c7cc;
+
+      &.active {
+        background: #111;
+      }
     }
   }
 
@@ -144,7 +188,7 @@
       width: auto;
       aspect-ratio: 16 / 9;
       object-fit: cover;
-      object-position: top center;
+      object-position: top left;
       border-radius: 2px;
 
       @media (min-width: $tablet) {
