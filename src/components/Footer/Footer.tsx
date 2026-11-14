@@ -55,6 +55,7 @@ export default function Footer() {
                   <a href="#home">Home</a>
                   <a href="#projects">Works</a>
                   <a href="#about">About</a>
+                  <a href="#contact">Contact</a>
                 </div>
               </div>
               
