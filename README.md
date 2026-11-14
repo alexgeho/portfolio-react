@@ -8,7 +8,7 @@ på teknik-tagg.
 Inlämningsuppgift 1 i kursen JavaScript ramverk (FED25D).
 
 - **Live:** https://portfolio-react-red-iota.vercel.app
-- **Figma-skiss (mobil och desktop):** _länk läggs till här_
+- **Figma-skiss (mobil och desktop):** https://www.figma.com/design/D70erATnc9i4GSAvhx6mBq
 
 ## Sektioner
 
@@ -64,6 +64,20 @@ src/
 - Annan state: vilket projekt som är öppet i "Läs mer"-fönstret, karusellens position
   och aktiv länk i navigationen.
 
+## Figma-skiss
+
+Skissen finns här: https://www.figma.com/design/D70erATnc9i4GSAvhx6mBq
+
+Den innehåller två ramar, **Desktop – 1440** och **Mobil – 375**, och visar sidans struktur:
+Hem, Om mig, Projekt (rubrik, filter på teknik-tagg, karusell med projektkort), Kontakt och
+den flytande navigationen. Projektkortet är en egen komponent i Figma (`ProjectCard`),
+precis som i koden.
+
 ## Ändringar från skissen
 
-_Beskrivs här när Figma-länken är tillagd._
+- Skissen är en wireframe. Bilderna är grå platshållare, på sidan visas riktiga skärmdumpar
+  i en laptop- eller mobil-mockup.
+- Sidan har några sektioner som inte finns i skissen: Tech stack, Portfolio facts,
+  Expertise och General information.
+- Navigationen har ikoner på sidan, i skissen står det text i knapparna.
+- I Hem-sektionen rullar teknik-märkena i två rader, i skissen är de en stilla rad.
