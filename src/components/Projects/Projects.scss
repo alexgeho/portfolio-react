@@ -51,6 +51,39 @@
       opacity: 0.9;
     }
   }
+
+  /* --- filter på teknik-taggar --- */
+  &__filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  &__filter-btn {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid $border-color;
+    background: $bg-card;
+    color: $text-primary;
+    cursor: pointer;
+    transition:
+      background-color $transition,
+      color $transition;
+
+    &:hover {
+      background: #ebebee;
+    }
+
+    &.active {
+      background: $text-primary;
+      border-color: $text-primary;
+      color: #ffffff;
+    }
+  }
 }
 
 /* --- carousel-container --- */
